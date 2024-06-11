@@ -16,13 +16,16 @@
 :hasA rdf:type owl:ObjectProperty ;
       rdfs:domain :Context ;
       rdfs:range :Trace ;
-      rdfs:comment "A context may have 0 to multiple traces of depression" .
+      rdfs:comment "A context may have 0 to multiple traces of depression" ;
+      rdfs:label "hasA" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/isAbout
 :isAbout rdf:type owl:ObjectProperty ;
          rdfs:domain :Context ;
-         rdfs:range :Person .
+         rdfs:range :Person ;
+         rdfs:comment "A context is about a specific person" ;
+         rdfs:label "isAbout" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/isPreservedAs
@@ -30,7 +33,8 @@
                rdfs:subPropertyOf owl:topObjectProperty ;
                rdfs:domain :Publication ;
                rdfs:range :Artifact ;
-               rdfs:comment "An artifact generated to preserve a social media publication" .
+               rdfs:comment "An artifact generated to preserve a social media publication" ;
+               rdfs:label "isPreservedAs" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/isResultOf
@@ -38,14 +42,16 @@
             rdfs:domain :Artifact ,
                         :Trace ;
             rdfs:range :Procedure ;
-            rdfs:comment "An artifcat is the result of a procedure" .
+            rdfs:comment "An artifact is the result of a procedure" ;
+            rdfs:label "isResultOf" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/owns
 :owns rdf:type owl:ObjectProperty ;
       rdfs:domain :Person ;
       rdfs:range :Account ;
-      rdfs:comment "The relation of a person with his social media  account" .
+      rdfs:comment "The relation of a person with his social media  account" ;
+      rdfs:label "owns" .
 
 
 #################################################################
@@ -221,313 +227,438 @@
 #################################################################
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Account
-:Account rdf:type owl:Class .
+:Account rdf:type owl:Class ;
+         rdfs:comment "A personal social media account" ;
+         rdfs:label "Account" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/AlcoholUse
 :AlcoholUse rdf:type owl:Class ;
-            rdfs:subClassOf :Behaviour .
+            rdfs:subClassOf :Behaviour ;
+            rdfs:comment "A trace of alcohol use, whether in a controlled social setting or associated with alcohol abuse." ;
+            rdfs:label "Alcohol Use" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Analisys
 :Analisys rdf:type owl:Class ;
-          rdfs:subClassOf :Procedure .
+          rdfs:subClassOf :Procedure ;
+          rdfs:comment "A technique for turning data into intelligence." ;
+          rdfs:label "Analisys" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Appetite
 :Appetite rdf:type owl:Class ;
-          rdfs:subClassOf :Feeling .
+          rdfs:subClassOf :Feeling ;
+          rdfs:comment "The natural desire to satisfy bodily needs for food." ;
+          rdfs:label "Appetite" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Artifact
-:Artifact rdf:type owl:Class .
+:Artifact rdf:type owl:Class ;
+          rdfs:comment "Any data that provides evidence of computer activity or digital interactions, preserved for analysis and trackability." ;
+          rdfs:label "Artifact" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Behaviour
 :Behaviour rdf:type owl:Class ;
-           rdfs:subClassOf :Trace .
+           rdfs:subClassOf :Trace ;
+           rdfs:comment "Behavior encompasses actions, reactions, or conduct displayed by individuals in various situations, reflecting their thoughts, feelings, and intentions." ;
+           rdfs:label "Behaviour" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Bipolar
 :Bipolar rdf:type owl:Class ;
-         rdfs:subClassOf :Condition .
+         rdfs:subClassOf :Condition ;
+         rdfs:comment "A psychiatric condition characterized by extreme mood swings, including manic and depressive episodes." ;
+         rdfs:label "Bipolar" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Birth
 :Birth rdf:type owl:Class ;
-       rdfs:subClassOf :Event .
+       rdfs:subClassOf :Event ;
+       rdfs:comment "The birth of a child" ;
+       rdfs:label "Birth" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/ChildhoodExperiences
 :ChildhoodExperiences rdf:type owl:Class ;
-                      rdfs:subClassOf :Event .
+                      rdfs:subClassOf :Event ;
+                      rdfs:comment "Any traumas or memorable experiences from the person's childhood that may influence a depression diagnosis" ;
+                      rdfs:label "Childhood Experiences" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Cognition
 :Cognition rdf:type owl:Class ;
-           rdfs:subClassOf :Trace .
+           rdfs:subClassOf :Trace ;
+           rdfs:comment "The mental action or process of acquiring knowledge and understanding through thought, experience, and the senses." ;
+           rdfs:label "Cognition" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Collection
 :Collection rdf:type owl:Class ;
-            rdfs:subClassOf :Procedure .
+            rdfs:subClassOf :Procedure ;
+            rdfs:comment "A technique used to collect the data." ;
+            rdfs:label "Collection" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Concentration
 :Concentration rdf:type owl:Class ;
-               rdfs:subClassOf :Cognition .
+               rdfs:subClassOf :Cognition ;
+               rdfs:comment "The ability to focus attention on a task for a sustained period of time." ;
+               rdfs:label "Concentration" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Condition
 :Condition rdf:type owl:Class ;
-           rdfs:subClassOf :Trace .
+           rdfs:subClassOf :Trace ;
+           rdfs:comment "A state of health, whether normal or disrupted, that may influences the depression diagnosis." ;
+           rdfs:label "Condition" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Context
-:Context rdf:type owl:Class .
+:Context rdf:type owl:Class ;
+         rdfs:comment "Historical data and conditions that influence or relate to the current state and behavior of the subject." ;
+         rdfs:label "Context" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Death
 :Death rdf:type owl:Class ;
-       rdfs:subClassOf :Event .
+       rdfs:subClassOf :Event ;
+       rdfs:comment "A death of a familiar, friend or any significant people that may cause grief, including pets." ;
+       rdfs:label "Death" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/DecisionMaking
 :DecisionMaking rdf:type owl:Class ;
-                rdfs:subClassOf :Cognition .
+                rdfs:subClassOf :Cognition ;
+                rdfs:comment "The process of making choices by identifying options and assessing the impact of each option." ;
+                rdfs:label "DecisionMaking" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Delusion
 :Delusion rdf:type owl:Class ;
-          rdfs:subClassOf :Cognition .
+          rdfs:subClassOf :Cognition ;
+          rdfs:comment "A false belief held with strong conviction despite superior evidence to the contrary." ;
+          rdfs:label "Delusion" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/DepressedMood
 :DepressedMood rdf:type owl:Class ;
                rdfs:subClassOf :Feeling ;
-               rdfs:comment "Depressive mood is a persistent state of sadness and low energy, often accompanied by feelings of hopelessness and disinterest in daily activities. Synonyms: Sadness, Rumination, Worthlessness, Distress, Indecisiveness, Hopelessness, Melancholy and Loneliness" .
+               rdfs:comment "Persistent sadness and a lack of interest or pleasure in previously rewarding or enjoyable activities. Synonyms: Sadness, Rumination, Worthlessness, Distress, Indecisiveness, Hopelessness, Melancholy and Loneliness" ;
+               rdfs:label "DepressedMood" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Depression
 :Depression rdf:type owl:Class ;
-            rdfs:subClassOf :Condition .
+            rdfs:subClassOf :Condition ;
+            rdfs:comment "A psychiatric condition marked by significant sadness, lack of energy, and low mood." ;
+            rdfs:label "Depression" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Discrimination
 :Discrimination rdf:type owl:Class ;
-                rdfs:subClassOf :Feeling .
+                rdfs:subClassOf :Feeling ;
+                rdfs:comment "Unjust or prejudicial treatment of different categories of people, often based on race, age, or gender." ;
+                rdfs:label "Discrimination" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Event
-:Event rdf:type owl:Class .
+:Event rdf:type owl:Class ;
+       rdfs:subClassOf :Trace ;
+       rdfs:comment "A significant event in a persons life that can affected a depression diagnoses" ;
+       rdfs:label "Event" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Fatigue
 :Fatigue rdf:type owl:Class ;
          rdfs:subClassOf :Feeling ;
-         rdfs:comment "Fatigue is a state of tiredness or exhaustion resulting from mental or physical exertion or illness. Synonyms:Burrden, Energy (Lack of), Tiredness" .
+         rdfs:comment "Fatigue is a state of tiredness or exhaustion resulting from mental or physical exertion or illness. Synonyms:Burrden, Energy (Lack of), Tiredness" ;
+         rdfs:label "Fatigue" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Feeling
 :Feeling rdf:type owl:Class ;
-         rdfs:subClassOf :Trace .
+         rdfs:subClassOf :Trace ;
+         rdfs:comment "An emotional state or reaction that is experienced internally and expressed outwardly" ;
+         rdfs:label "Feeling" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Gastrointestinal
 :Gastrointestinal rdf:type owl:Class ;
-                  rdfs:subClassOf :Condition .
+                  rdfs:subClassOf :Condition ;
+                  rdfs:comment "Disturbances in the stomach and intestines." ;
+                  rdfs:label "Gastrointestinal" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Guilt
 :Guilt rdf:type owl:Class ;
-       rdfs:subClassOf :Feeling .
+       rdfs:subClassOf :Feeling ;
+       rdfs:comment "The emotional experience resulting from the perception of having done something wrong." ;
+       rdfs:label "Guilt" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Hypersomnia
 :Hypersomnia rdf:type owl:Class ;
-             rdfs:subClassOf :Sleep .
+             rdfs:subClassOf :Sleep ;
+             rdfs:comment "Hypersomnia is characterized by excessive daytime sleepiness, leading to prolonged and unrefreshing sleep." ;
+             rdfs:label "Hypersomnia" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Hypomania
 :Hypomania rdf:type owl:Class ;
-           rdfs:subClassOf :Bipolar .
+           rdfs:subClassOf :Bipolar ;
+           rdfs:comment "A milder form of mania, marked by elation and hyperactivity." ;
+           rdfs:label "Hypomania" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Identification
 :Identification rdf:type owl:Class ;
-                rdfs:subClassOf :Procedure .
+                rdfs:subClassOf :Procedure ;
+                rdfs:comment "A technique used identify the data that must be collected" ;
+                rdfs:label "Identification" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Impairment
 :Impairment rdf:type owl:Class ;
-            rdfs:subClassOf :Trace .
+            rdfs:subClassOf :Trace ;
+            rdfs:comment "A reduction in function or ability, often described in the context of physical or mental capabilities." ;
+            rdfs:label "Impairment" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/ImpulseControl
 :ImpulseControl rdf:type owl:Class ;
-                rdfs:subClassOf :Cognition .
+                rdfs:subClassOf :Cognition ;
+                rdfs:comment "The ability to resist or delay an impulse, drive, or temptation to act." ;
+                rdfs:label "Impulse Control" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Insomnia
 :Insomnia rdf:type owl:Class ;
-          rdfs:subClassOf :Sleep .
+          rdfs:subClassOf :Sleep ;
+          rdfs:comment "Insomnia is characterized by difficulty falling asleep or staying asleep, leading to inadequate or non-restorative sleep." ;
+          rdfs:label "Insomnia" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Interest
 :Interest rdf:type owl:Class ;
-          rdfs:subClassOf :Feeling .
+          rdfs:subClassOf :Feeling ;
+          rdfs:comment "The feeling of wanting to know or learn about something or someone." ;
+          rdfs:label "Interest" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Irritability
 :Irritability rdf:type owl:Class ;
-              rdfs:subClassOf :Feeling .
+              rdfs:subClassOf :Feeling ;
+              rdfs:comment "The quality or state of being easily annoyed or provoked to anger." ;
+              rdfs:label "Irritability" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Mania
 :Mania rdf:type owl:Class ;
-       rdfs:subClassOf :Bipolar .
+       rdfs:subClassOf :Bipolar ;
+       rdfs:comment "A mental state characterized by excessive excitement, energy, and euphoria." ;
+       rdfs:label "Mania" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/MedicalRecord
 :MedicalRecord rdf:type owl:Class ;
-               rdfs:subClassOf :Context .
+               rdfs:subClassOf :Context ;
+               rdfs:comment "Medical records generated by a professional recording the relevant information after a medical or therapeutic appointment." ;
+               rdfs:label "Medical Records" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Memory
 :Memory rdf:type owl:Class ;
-        rdfs:subClassOf :Cognition .
+        rdfs:subClassOf :Cognition ;
+        rdfs:comment "The faculty by which the mind stores and remembers information." ;
+        rdfs:label "Memory" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Pain
 :Pain rdf:type owl:Class ;
-      rdfs:subClassOf :Feeling .
+      rdfs:subClassOf :Feeling ;
+      rdfs:comment "An unpleasant sensory and emotional experience associated with actual or potential tissue damage." ;
+      rdfs:label "Pain" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Person
-:Person rdf:type owl:Class .
+:Person rdf:type owl:Class ;
+        rdfs:comment "A person subject of the investigation" ;
+        rdfs:label "Person" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Pleasure
 :Pleasure rdf:type owl:Class ;
-          rdfs:subClassOf :Feeling .
+          rdfs:subClassOf :Feeling ;
+          rdfs:comment "A feeling of happy satisfaction and enjoyment." ;
+          rdfs:label "Pleasure" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Post
 :Post rdf:type owl:Class ;
-      rdfs:subClassOf :Publication .
+      rdfs:subClassOf :Publication ;
+      rdfs:comment "A publication on a social media platform, presented as a post, represents a timestamped update that remains independent from other posts, contrasting with profile updates that overwrite the previous content." ;
+      rdfs:label "Post" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Presentation
 :Presentation rdf:type owl:Class ;
-              rdfs:subClassOf :Procedure .
+              rdfs:subClassOf :Procedure ;
+              rdfs:comment "A technique used to share the intelligence produced." ;
+              rdfs:label "Presentation" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Procedure
-:Procedure rdf:type owl:Class .
+:Procedure rdf:type owl:Class ;
+           rdfs:comment "A technique used to turn raw data into intelligence." ;
+           rdfs:label "Procedure" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Profile
 :Profile rdf:type owl:Class ;
-         rdfs:subClassOf :Publication .
+         rdfs:subClassOf :Publication ;
+         rdfs:label "A publication on a social media platform, presented as a profile, represents an update of the users profile, usually whitout timestamp that overwrite the previous content." ,
+                    "Profile" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/PsychomotorActivity
 :PsychomotorActivity rdf:type owl:Class ;
-                     rdfs:subClassOf :Cognition .
+                     rdfs:subClassOf :Cognition ;
+                     rdfs:comment "Physical activities that are influenced by mental processes, including changes in speed or movement associated with mental states." ;
+                     rdfs:label "Psychomotor Activity" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Psychotic
 :Psychotic rdf:type owl:Class ;
-           rdfs:subClassOf :Condition .
+           rdfs:subClassOf :Condition ;
+           rdfs:comment "Conditions related to psychosis disorders, which includes delusions or hallucinations, often involving a loss of contact with reality." ;
+           rdfs:label "Psychotic" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Publication
 :Publication rdf:type owl:Class ;
-             rdfs:subClassOf :Context .
+             rdfs:subClassOf :Context ;
+             rdfs:comment "A publication made in a social media platform by a person" ;
+             rdfs:label "Publication" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Relation
 :Relation rdf:type owl:Class ;
-          rdfs:subClassOf :Trace .
+          rdfs:subClassOf :Trace ;
+          rdfs:comment "Refers to a significant connection with someone like a parent or a pet, characterized by emotional bonds and personal attachment." ;
+          rdfs:label "Relation" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Schizophrenia
 :Schizophrenia rdf:type owl:Class ;
-               rdfs:subClassOf :Psychotic .
+               rdfs:subClassOf :Psychotic ;
+               rdfs:comment "A long-term mental disorder involving a breakdown in the relation between thought, emotion, and behavior, leading to faulty perception and withdrawal." ;
+               rdfs:label "Schizophrenia" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/SexualAbuse
 :SexualAbuse rdf:type owl:Class ;
-             rdfs:subClassOf :Event .
+             rdfs:subClassOf :Event ;
+             rdfs:comment "Any specific trace that can signify sexual abuse." ;
+             rdfs:label "Sexual Abuse" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/SignificantLoss
 :SignificantLoss rdf:type owl:Class ;
-                 rdfs:subClassOf :Event .
+                 rdfs:subClassOf :Event ;
+                 rdfs:comment "A substantial and impactful loss that contributes to the development or exacerbation of depressive symptoms, different from a death or a trauma" ;
+                 rdfs:label "Significant Loss" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Sleep
 :Sleep rdf:type owl:Class ;
-       rdfs:subClassOf :Behaviour .
+       rdfs:subClassOf :Behaviour ;
+       rdfs:comment "Sleep refers to traces of the natural state of rest undergo by people" ;
+       rdfs:isDefinedBy "Sleep" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/SocialIsolation
 :SocialIsolation rdf:type owl:Class ;
-                 rdfs:subClassOf :Feeling .
+                 rdfs:subClassOf :Feeling ;
+                 rdfs:comment "A state where an individual lacks a sense of social belonging, social engagement, and fulfilling relationships." ;
+                 rdfs:label "Social Isolation" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/SomaticComplaints
 :SomaticComplaints rdf:type owl:Class ;
-                   rdfs:subClassOf :Feeling .
+                   rdfs:subClassOf :Feeling ;
+                   rdfs:comment "Somatic complaints are physical symptoms that may arise from psychological factors, often lacking a clear medical cause." ;
+                   rdfs:label "Somatic Complaints" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Storage
 :Storage rdf:type owl:Class ;
-         rdfs:subClassOf :Procedure .
+         rdfs:subClassOf :Procedure ;
+         rdfs:comment "A technique used to storage the collected data." ;
+         rdfs:label "Storage" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Stress
 :Stress rdf:type owl:Class ;
-        rdfs:subClassOf :Feeling .
+        rdfs:subClassOf :Feeling ;
+        rdfs:comment "A state of mental or emotional strain or tension resulting from adverse or demanding circumstances." ;
+        rdfs:label "Stress" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/SubstanceUse
 :SubstanceUse rdf:type owl:Class ;
-              rdfs:subClassOf :Behaviour .
+              rdfs:subClassOf :Behaviour ;
+              rdfs:comment "A trace of substance use other than alcohol, whether illicit or prescribed medication, which may impact the diagnosis of depression" ;
+              rdfs:label "Substance Use" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/SuicidalBehaviour
 :SuicidalBehaviour rdf:type owl:Class ;
-                   rdfs:subClassOf :Behaviour .
+                   rdfs:subClassOf :Behaviour ;
+                   rdfs:comment "Suicidal behavior refers to actions or thoughts that involve an individual contemplating or attempting to take their own life." ;
+                   rdfs:label "Suicidal Behaviour" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/SuicideAttempt
 :SuicideAttempt rdf:type owl:Class ;
-                rdfs:subClassOf :SuicidalBehaviour .
+                rdfs:subClassOf :SuicidalBehaviour ;
+                rdfs:comment "A suicide attempt is an intentional, self-inflicted action with the purpose of causing one's own death, although it may not result in death." ;
+                rdfs:label "Suicide Attempt" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/SuicideIdeation
 :SuicideIdeation rdf:type owl:Class ;
-                 rdfs:subClassOf :SuicidalBehaviour .
+                 rdfs:subClassOf :SuicidalBehaviour ;
+                 rdfs:comment "Suicidal ideation refers to thoughts, contemplation, or fantasies about taking one's own life." ;
+                 rdfs:label "Suicide Ideation" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Thinking
 :Thinking rdf:type owl:Class ;
-          rdfs:subClassOf :Cognition .
+          rdfs:subClassOf :Cognition ;
+          rdfs:comment "The process of considering or reasoning about something; cognitive consideration of information." ;
+          rdfs:label "Thinking" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Trace
-:Trace rdf:type owl:Class .
+:Trace rdf:type owl:Class ;
+       rdfs:comment "A subtype of material evidence is trace evidence, which consists of small amounts (often microscopic) of material found at a crime scene that can also be relevant to an investigation." ;
+       rdfs:label "Trace" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Trauma
 :Trauma rdf:type owl:Class ;
-        rdfs:subClassOf :Event .
+        rdfs:subClassOf :Event ;
+        rdfs:comment "A deeply distressing or disturbing experience that overwhelms an individual's ability to cope, often resulting in lasting emotional or psychological effects.\"" ;
+        rdfs:label "Trauma" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Weight
 :Weight rdf:type owl:Class ;
-        rdfs:subClassOf :Condition .
+        rdfs:subClassOf :Condition ;
+        rdfs:comment "Pertains to body mass, can refer to changes in weight (gain and/or loss)" ;
+        rdfs:label "Weight" .
 
 
 #################################################################
@@ -1119,6 +1250,21 @@ Designer and RPG enthusiast as a hobby""" ;
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/VADERSentimentScoring
 :VADERSentimentScoring rdf:type owl:NamedIndividual ,
                                 :Analisys .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Account
+                :Artifact
+                :Context
+                :Person
+                :Procedure
+                :Trace
+              )
+] .
 
 
 ###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi
