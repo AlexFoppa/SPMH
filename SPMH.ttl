@@ -258,12 +258,6 @@
        rdfs:subClassOf :Event .
 
 
-###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Burden
-:Burden rdf:type owl:Class ;
-        owl:equivalentClass :DepressedMood ;
-        rdfs:subClassOf :Feeling .
-
-
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/ChildhoodExperiences
 :ChildhoodExperiences rdf:type owl:Class ;
                       rdfs:subClassOf :Event .
@@ -310,15 +304,8 @@
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/DepressedMood
 :DepressedMood rdf:type owl:Class ;
-               owl:equivalentClass :Distress ,
-                                   :Hopelessness ,
-                                   :Indecisiveness ,
-                                   :Loneliness ,
-                                   :Melancholy ,
-                                   :Rumination ,
-                                   :Sadness ,
-                                   :Worthlessness ;
-               rdfs:subClassOf :Feeling .
+               rdfs:subClassOf :Feeling ;
+               rdfs:comment "Depressive mood is a persistent state of sadness and low energy, often accompanied by feelings of hopelessness and disinterest in daily activities. Synonyms: Sadness, Rumination, Worthlessness, Distress, Indecisiveness, Hopelessness, Melancholy and Loneliness" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Depression
@@ -331,26 +318,14 @@
                 rdfs:subClassOf :Feeling .
 
 
-###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Distress
-:Distress rdf:type owl:Class ;
-          rdfs:subClassOf :Feeling .
-
-
-###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Energy
-:Energy rdf:type owl:Class ;
-        owl:equivalentClass :Fatigue ,
-                            :Tiredness ;
-        rdfs:subClassOf :Feeling .
-
-
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Event
 :Event rdf:type owl:Class .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Fatigue
 :Fatigue rdf:type owl:Class ;
-         owl:equivalentClass :Tiredness ;
-         rdfs:subClassOf :Feeling .
+         rdfs:subClassOf :Feeling ;
+         rdfs:comment "Fatigue is a state of tiredness or exhaustion resulting from mental or physical exertion or illness. Synonyms:Burrden, Energy (Lack of), Tiredness" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Feeling
@@ -366,11 +341,6 @@
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Guilt
 :Guilt rdf:type owl:Class ;
        rdfs:subClassOf :Feeling .
-
-
-###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Hopelessness
-:Hopelessness rdf:type owl:Class ;
-              rdfs:subClassOf :Feeling .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Hypersomnia
@@ -398,11 +368,6 @@
                 rdfs:subClassOf :Cognition .
 
 
-###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Indecisiveness
-:Indecisiveness rdf:type owl:Class ;
-                rdfs:subClassOf :Feeling .
-
-
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Insomnia
 :Insomnia rdf:type owl:Class ;
           rdfs:subClassOf :Sleep .
@@ -418,11 +383,6 @@
               rdfs:subClassOf :Feeling .
 
 
-###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Loneliness
-:Loneliness rdf:type owl:Class ;
-            rdfs:subClassOf :Feeling .
-
-
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Mania
 :Mania rdf:type owl:Class ;
        rdfs:subClassOf :Bipolar .
@@ -431,11 +391,6 @@
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/MedicalRecord
 :MedicalRecord rdf:type owl:Class ;
                rdfs:subClassOf :Context .
-
-
-###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Melancholy
-:Melancholy rdf:type owl:Class ;
-            rdfs:subClassOf :Feeling .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Memory
@@ -494,16 +449,6 @@
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Relation
 :Relation rdf:type owl:Class ;
           rdfs:subClassOf :Trace .
-
-
-###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Rumination
-:Rumination rdf:type owl:Class ;
-            rdfs:subClassOf :Feeling .
-
-
-###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Sadness
-:Sadness rdf:type owl:Class ;
-         rdfs:subClassOf :Feeling .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Schizophrenia
@@ -571,11 +516,6 @@
           rdfs:subClassOf :Cognition .
 
 
-###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Tiredness
-:Tiredness rdf:type owl:Class ;
-           rdfs:subClassOf :Feeling .
-
-
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Trace
 :Trace rdf:type owl:Class .
 
@@ -588,11 +528,6 @@
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Weight
 :Weight rdf:type owl:Class ;
         rdfs:subClassOf :Condition .
-
-
-###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Worthlessness
-:Worthlessness rdf:type owl:Class ;
-               rdfs:subClassOf :Feeling .
 
 
 #################################################################
@@ -1088,8 +1023,7 @@ Designer and RPG enthusiast as a hobby""" ;
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Trace05
-:Trace05 rdf:type owl:NamedIndividual ,
-                  :Sadness ;
+:Trace05 rdf:type owl:NamedIndividual ;
          :isResultOf :LLMTraceDetection ;
          :hasExplanation "Potentially, the inability to continue drawing could be linked to feelings like frustration or sadness, but these are not explicitly stated in the text." .
 
@@ -1123,8 +1057,7 @@ Designer and RPG enthusiast as a hobby""" ;
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Trace10
-:Trace10 rdf:type owl:NamedIndividual ,
-                  :Sadness ;
+:Trace10 rdf:type owl:NamedIndividual ;
          :isResultOf :LLMTraceDetection ;
          :hasExplanation "Yes, the text conveys sentiments of sadness and loss due to the death of \"dear big ears,\" which might be a nickname for a beloved pet or individual. It also expresses a hopeful sentiment that \"Heaven became a happier place.\"" .
 
