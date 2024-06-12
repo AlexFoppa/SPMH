@@ -12,22 +12,39 @@
 #    Object Properties
 #################################################################
 
+###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH#hasContext
+:hasContext rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf owl:topObjectProperty ;
+            owl:inverseOf :isAbout ;
+            rdfs:domain :Person ;
+            rdfs:range :Context ;
+            rdfs:comment "A person may have several contexts" ;
+            rdfs:label "hasContext" .
+
+
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/creates
 :creates rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf owl:topObjectProperty ;
          owl:inverseOf :isResultOf ;
+         rdfs:domain :Procedure ;
+         rdfs:range :Artifact ;
          rdfs:comment "A procedure can create an artifact" ;
          rdfs:label "creates" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/finds
 :finds rdf:type owl:ObjectProperty ;
+       rdfs:subPropertyOf owl:topObjectProperty ;
        owl:inverseOf :isFoundUsing ;
+       rdfs:domain :Procedure ;
+       rdfs:range :Trace ;
        rdfs:comment "A procedure can find a trace" ;
        rdfs:label "finds" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/hasA
 :hasA rdf:type owl:ObjectProperty ;
+      rdfs:subPropertyOf owl:topObjectProperty ;
       owl:inverseOf :isFoundIn ;
       rdfs:domain :Context ;
       rdfs:range :Trace ;
@@ -39,12 +56,15 @@
 :hasOriginIn rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf owl:topObjectProperty ;
              owl:inverseOf :isPreservedAs ;
+             rdfs:domain :Artifact ;
+             rdfs:range :Publication ;
              rdfs:comment "An artifact is generated based on a social media publication" ;
              rdfs:label "hasOriginIn" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/isAbout
 :isAbout rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf owl:topObjectProperty ;
          rdfs:domain :Context ;
          rdfs:range :Person ;
          rdfs:comment "A context is about a specific person" ;
@@ -53,12 +73,16 @@
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/isFoundIn
 :isFoundIn rdf:type owl:ObjectProperty ;
-           rdfs:comment "A trace is found in a specific publication" ;
+           rdfs:subPropertyOf owl:topObjectProperty ;
+           rdfs:domain :Trace ;
+           rdfs:range :Context ;
+           rdfs:comment "A trace is found in a specific publication or medical record" ;
            rdfs:label "isFoundIn" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/isFoundUsing
 :isFoundUsing rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf owl:topObjectProperty ;
               rdfs:domain :Trace ;
               rdfs:range :Procedure ;
               rdfs:comment "A trace is found using a specific procedure" ;
@@ -67,7 +91,10 @@
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/isOwned
 :isOwned rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf owl:topObjectProperty ;
          owl:inverseOf :owns ;
+         rdfs:domain :Account ;
+         rdfs:range :Person ;
          rdfs:comment "A social media account has a person as an owner" ;
          rdfs:label "isOwnedBy" .
 
@@ -83,6 +110,7 @@
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/isResultOf
 :isResultOf rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf owl:topObjectProperty ;
             rdfs:domain :Artifact ;
             rdfs:range :Procedure ;
             rdfs:comment "An artifact is the result of a procedure" ;
@@ -91,6 +119,7 @@
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/owns
 :owns rdf:type owl:ObjectProperty ;
+      rdfs:subPropertyOf owl:topObjectProperty ;
       rdfs:domain :Person ;
       rdfs:range :Account ;
       rdfs:comment "The relation of a person with his social media  account" ;
@@ -101,15 +130,6 @@
 #    Data properties
 #################################################################
 
-###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH#hasAccountUrl
-:hasAccountUrl rdf:type owl:DatatypeProperty ;
-               rdfs:subPropertyOf owl:topDataProperty ;
-               rdfs:domain :Account ;
-               rdfs:range xsd:string ;
-               rdfs:comment "The url of an account" ;
-               rdfs:label "hasAccountUrl" .
-
-
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/comesFromSocialPlatform
 :comesFromSocialPlatform rdf:type owl:DatatypeProperty ;
                          rdfs:subPropertyOf owl:topDataProperty ;
@@ -117,6 +137,15 @@
                          rdfs:range xsd:string ;
                          rdfs:comment "The social media platform where the publication was published" ;
                          rdfs:label "comesFromSocialPlatform" .
+
+
+###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/hasAccountUrl
+:hasAccountUrl rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf owl:topDataProperty ;
+               rdfs:domain :Account ;
+               rdfs:range xsd:string ;
+               rdfs:comment "The url of an account" ;
+               rdfs:label "hasAccountUrl" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/hasAge
@@ -674,7 +703,7 @@ owl:topDataProperty rdfs:subPropertyOf owl:topDataProperty .
 :Sleep rdf:type owl:Class ;
        rdfs:subClassOf :Behaviour ;
        rdfs:comment "Sleep refers to traces of the natural state of rest undergo by people" ;
-       rdfs:isDefinedBy "Sleep" .
+       rdfs:label "Sleep" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/SocialIsolation
@@ -990,13 +1019,13 @@ owl:topDataProperty rdfs:subPropertyOf owl:topDataProperty .
           :hasA :Trace17 ;
           :isAbout :AccountID1 ;
           :isPreservedAs :Artifact01 ;
-          :publishedInSocialPlatform "Instagram" ;
           :hasCapturedMoment "2024-08-05T19:05:54Z"^^xsd:dateTimeStamp ;
           :hasMoment "2024-02-26T01:07:57Z"^^xsd:dateTimeStamp ;
           :hasSentimentScore -0.5423 ;
           :hasTextContent "The death of Sandman, sitting in front of a dead rosebush that grew where she stuck her umbrella in the ground. It didn't turn out as I wanted, but I posted it anyway" ;
           :hasUrl "https://www.instagram.com/p/Cat12xwN/" ;
-          :isRelevant "false"^^xsd:boolean .
+          :isRelevant "false"^^xsd:boolean ;
+          :publishedInSocialPlatform "Instagram" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/PostID02
@@ -1005,13 +1034,13 @@ owl:topDataProperty rdfs:subPropertyOf owl:topDataProperty .
           :hasA :Trace16 ;
           :isAbout :AccountID1 ;
           :isPreservedAs :Artifact02 ;
-          :publishedInSocialPlatform "Instagram" ;
           :hasCapturedMoment "2024-08-05T19:05:54Z"^^xsd:dateTimeStamp ;
           :hasMoment "2023-12-21T20:14:08Z"^^xsd:dateTimeStamp ;
           :hasSentimentScore 0.2263 ;
           :hasTextContent "Taking advantage of the holidays to draw a little" ;
           :hasUrl "https://www.instagram.com/p/Bd38fTqA/" ;
-          :isRelevant "false"^^xsd:boolean .
+          :isRelevant "false"^^xsd:boolean ;
+          :publishedInSocialPlatform "Instagram" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/PostID03
@@ -1023,13 +1052,13 @@ owl:topDataProperty rdfs:subPropertyOf owl:topDataProperty .
                 :Trace15 ;
           :isAbout :AccountID1 ;
           :isPreservedAs :Artifact03 ;
-          :publishedInSocialPlatform "Instagram" ;
           :hasCapturedMoment "2024-08-05T19:05:54Z"^^xsd:dateTimeStamp ;
           :hasMoment "2022-05-14T01:39:45Z"^^xsd:dateTimeStamp ;
           :hasSentimentScore 0.0516 ;
           :hasTextContent "After a decade, recording the first time I'm going back to college and have a beer after, without using a sling. It still hurts (and it's not a little), but between weakening the pain with medical treatment, lifestyle changes, and personal growth, today, the pain didn't take away my smile, so I won this battle. A small victory, but one that I think is worthy of celebration" ;
           :hasUrl "https://www.instagram.com/p/ECzA9pjW/" ;
-          :isRelevant "false"^^xsd:boolean .
+          :isRelevant "false"^^xsd:boolean ;
+          :publishedInSocialPlatform "Instagram" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/PostID04
@@ -1038,13 +1067,13 @@ owl:topDataProperty rdfs:subPropertyOf owl:topDataProperty .
           :hasA :Trace11 ;
           :isAbout :AccountID1 ;
           :isPreservedAs :Artifact04 ;
-          :publishedInSocialPlatform "Instagram" ;
           :hasCapturedMoment "2024-08-05T19:05:54Z"^^xsd:dateTimeStamp ;
           :hasMoment "2021-12-22T00:51:17Z"^^xsd:dateTimeStamp ;
           :hasSentimentScore 0.2263 ;
           :hasTextContent "Updating the profile picture, after four years" ;
           :hasUrl "https://www.instagram.com/p/GtM3L5Oz/" ;
-          :isRelevant "false"^^xsd:boolean .
+          :isRelevant "false"^^xsd:boolean ;
+          :publishedInSocialPlatform "Instagram" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/PostID05
@@ -1054,13 +1083,13 @@ owl:topDataProperty rdfs:subPropertyOf owl:topDataProperty .
                 :Trace10 ;
           :isAbout :AccountID1 ;
           :isPreservedAs :Artifact05 ;
-          :publishedInSocialPlatform "Instagram" ;
           :hasCapturedMoment "2024-08-05T19:05:54Z"^^xsd:dateTimeStamp ;
           :hasMoment "2021-06-21T02:58:09Z"^^xsd:dateTimeStamp ;
           :hasSentimentScore 0.2263 ;
           :hasTextContent "Rest in peace, dear big ears. Heaven became a happier place" ;
           :hasUrl "https://www.instagram.com/p/JPnB4FsK/" ;
-          :isRelevant "false"^^xsd:boolean .
+          :isRelevant "false"^^xsd:boolean ;
+          :publishedInSocialPlatform "Instagram" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/PostID06
@@ -1069,13 +1098,13 @@ owl:topDataProperty rdfs:subPropertyOf owl:topDataProperty .
           :hasA :Trace08 ;
           :isAbout :AccountID1 ;
           :isPreservedAs :Artifact06 ;
-          :publishedInSocialPlatform "Instagram" ;
           :hasCapturedMoment "2024-08-05T19:05:54Z"^^xsd:dateTimeStamp ;
           :hasMoment "2021-05-14T15:28:46Z"^^xsd:dateTimeStamp ;
           :hasSentimentScore 0.2263 ;
           :hasTextContent "Human, my plate was missing. Folks, I need a plate for lunch!" ;
           :hasUrl "https://www.instagram.com/p/K5yVpW83/" ;
-          :isRelevant "false"^^xsd:boolean .
+          :isRelevant "false"^^xsd:boolean ;
+          :publishedInSocialPlatform "Instagram" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/PostID07
@@ -1085,13 +1114,13 @@ owl:topDataProperty rdfs:subPropertyOf owl:topDataProperty .
                 :Trace07 ;
           :isAbout :AccountID1 ;
           :isPreservedAs :Artifact07 ;
-          :publishedInSocialPlatform "Instagram" ;
           :hasCapturedMoment "2024-08-05T19:05:54Z"^^xsd:dateTimeStamp ;
           :hasMoment "2021-04-29T22:05:03Z"^^xsd:dateTimeStamp ;
           :hasSentimentScore 0.4588 ;
           :hasTextContent "In the first meeting with a new coworker, she said that I look like a character from The Lord of the Rings. I thought it was funny, so I decided to check if my social isolation look resembles any of the bearded ones, or if I'm an original character. What do you think?" ;
           :hasUrl "https://www.instagram.com/p/L1xwZq64/" ;
-          :isRelevant "true"^^xsd:boolean .
+          :isRelevant "true"^^xsd:boolean ;
+          :publishedInSocialPlatform "Instagram" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/PostID08
@@ -1100,13 +1129,13 @@ owl:topDataProperty rdfs:subPropertyOf owl:topDataProperty .
           :hasA :Trace05 ;
           :isAbout :AccountID1 ;
           :isPreservedAs :Artifact08 ;
-          :publishedInSocialPlatform "Instagram" ;
           :hasCapturedMoment "2024-08-05T19:05:54Z"^^xsd:dateTimeStamp ;
           :hasMoment "2021-03-12T21:26:43Z"^^xsd:dateTimeStamp ;
           :hasSentimentScore 0.2263 ;
           :hasTextContent "Because I couldn't keep drawing" ;
           :hasUrl "https://www.instagram.com/p/M9zP7tqE/" ;
-          :isRelevant "false"^^xsd:boolean .
+          :isRelevant "false"^^xsd:boolean ;
+          :publishedInSocialPlatform "Instagram" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/PostID09
@@ -1115,13 +1144,13 @@ owl:topDataProperty rdfs:subPropertyOf owl:topDataProperty .
           :hasA :Trace04 ;
           :isAbout :AccountID1 ;
           :isPreservedAs :Artifact09 ;
-          :publishedInSocialPlatform "Instagram" ;
           :hasCapturedMoment "2024-08-05T19:05:54Z"^^xsd:dateTimeStamp ;
           :hasMoment "2020-12-24T23:47:39Z"^^xsd:dateTimeStamp ;
           :hasSentimentScore 0.2263 ;
           :hasTextContent "Want a loving companion for the next year? How about one of these kittens?" ;
           :hasUrl "https://www.instagram.com/p/Nw1K6FHJ/" ;
-          :isRelevant "false"^^xsd:boolean .
+          :isRelevant "false"^^xsd:boolean ;
+          :publishedInSocialPlatform "Instagram" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/PostID10
@@ -1131,13 +1160,13 @@ owl:topDataProperty rdfs:subPropertyOf owl:topDataProperty .
                 :Trace03 ;
           :isAbout :AccountID1 ;
           :isPreservedAs :Artifact10 ;
-          :publishedInSocialPlatform "Instagram" ;
           :hasCapturedMoment "2024-08-05T19:05:54Z"^^xsd:dateTimeStamp ;
           :hasMoment "2020-09-22T22:04:20Z"^^xsd:dateTimeStamp ;
           :hasSentimentScore 0.4574 ;
           :hasTextContent "Due to the pandemic and its impacts on my physical condition, I ended up not being able to attend my graduation ceremony in March, and only managed to pick up the diploma today. And, to my surprise, I found with it the certificates of having received the SAP Honor Student Award and the Outstanding Student award from the Brazilian Computing Society. So, since I didn't have the opportunity to thank at the time, I would like to thank through my social networks for this recognition, as well as to share this news with my friends and ask for apologies for taking so long to send this thanks - it wasn't on purpose, I just didn't know before. I also don't know exactly who to thank... but the feeling is sincere, and I hope it reaches all those involved :) \\n\\n#SAPHonorStudentAward" ;
           :hasUrl "https://www.instagram.com/p/O4r2j0U5/" ;
-          :isRelevant "true"^^xsd:boolean .
+          :isRelevant "true"^^xsd:boolean ;
+          :publishedInSocialPlatform "Instagram" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/PostID11
@@ -1145,13 +1174,13 @@ owl:topDataProperty rdfs:subPropertyOf owl:topDataProperty .
                    :Post ;
           :isAbout :AccountID1 ;
           :isPreservedAs :Artifact11 ;
-          :publishedInSocialPlatform "Instagram" ;
           :hasCapturedMoment "2024-08-05T19:05:54Z"^^xsd:dateTimeStamp ;
           :hasMoment "2020-05-09T03:09:26Z"^^xsd:dateTimeStamp ;
           :hasSentimentScore 0.2263 ;
           :hasTextContent "Harley Quinn in shades of gray - from the quarantine drawings series" ;
           :hasUrl "https://www.instagram.com/p/P7hD63Zo/" ;
-          :isRelevant "false"^^xsd:boolean .
+          :isRelevant "false"^^xsd:boolean ;
+          :publishedInSocialPlatform "Instagram" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/PostID12
@@ -1159,13 +1188,13 @@ owl:topDataProperty rdfs:subPropertyOf owl:topDataProperty .
                    :Post ;
           :isAbout :AccountID1 ;
           :isPreservedAs :Artifact12 ;
-          :publishedInSocialPlatform "Instagram" ;
           :hasCapturedMoment "2024-08-05T19:05:54Z"^^xsd:dateTimeStamp ;
           :hasMoment "2020-04-23T21:31:08Z"^^xsd:dateTimeStamp ;
           :hasSentimentScore -0.2263 ;
           :hasTextContent "Ready to buy bread, and to deliver a fatality to Scorpion" ;
           :hasUrl "https://www.instagram.com/p/RtJk9lFp/" ;
-          :isRelevant "false"^^xsd:boolean .
+          :isRelevant "false"^^xsd:boolean ;
+          :publishedInSocialPlatform "Instagram" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/PostID13
@@ -1174,13 +1203,13 @@ owl:topDataProperty rdfs:subPropertyOf owl:topDataProperty .
           :hasA :Trace01 ;
           :isAbout :AccountID1 ;
           :isPreservedAs :Artifact13 ;
-          :publishedInSocialPlatform "Instagram" ;
           :hasCapturedMoment "2024-08-05T19:05:54Z"^^xsd:dateTimeStamp ;
           :hasMoment "2020-04-01T00:04:48Z"^^xsd:dateTimeStamp ;
           :hasSentimentScore 0.2263 ;
           :hasTextContent "This is Anita, my cat, for those who don't know. Taking advantage of the quarantine to practice a little drawing" ;
           :hasUrl "https://www.instagram.com/p/QbE8K1rh/" ;
-          :isRelevant "true"^^xsd:boolean .
+          :isRelevant "true"^^xsd:boolean ;
+          :publishedInSocialPlatform "Instagram" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/PostID14
@@ -1188,13 +1217,13 @@ owl:topDataProperty rdfs:subPropertyOf owl:topDataProperty .
                    :Post ;
           :isAbout :AccountID1 ;
           :isPreservedAs :Artifact14 ;
-          :publishedInSocialPlatform "Instagram" ;
           :hasCapturedMoment "2024-08-05T19:05:54Z"^^xsd:dateTimeStamp ;
           :hasMoment "2018-07-06T21:31:50Z"^^xsd:dateTimeStamp ;
           :hasSentimentScore 0.2263 ;
           :hasTextContent "How to improve teamwork?" ;
           :hasUrl "https://www.instagram.com/p/SwP0A2Gy/" ;
-          :isRelevant "false"^^xsd:boolean .
+          :isRelevant "false"^^xsd:boolean ;
+          :publishedInSocialPlatform "Instagram" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/ProfileID1
@@ -1202,14 +1231,14 @@ owl:topDataProperty rdfs:subPropertyOf owl:topDataProperty .
                      :Profile ;
             :isAbout :AccountID1 ;
             :isPreservedAs :Artifact15 ;
-            :publishedInSocialPlatform "Instagram" ;
             :hasCapturedMoment "2024-08-05T19:05:54Z"^^xsd:dateTimeStamp ;
             :hasSentimentScore 0.4588 ;
             :hasTextContent """Technologist with a focus on health
 Master's student in IT
 Designer and RPG enthusiast as a hobby""" ;
             :hasUrl "https://www.instagram.com/fakeuser124233/" ;
-            :isRelevant "false"^^xsd:boolean .
+            :isRelevant "false"^^xsd:boolean ;
+            :publishedInSocialPlatform "Instagram" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/RegularAPIExtraction
