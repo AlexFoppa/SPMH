@@ -12,12 +12,35 @@
 #    Object Properties
 #################################################################
 
+###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/creates
+:creates rdf:type owl:ObjectProperty ;
+         owl:inverseOf :isResultOf ;
+         rdfs:comment "A procedure can create an artifact" ;
+         rdfs:label "creates" .
+
+
+###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/finds
+:finds rdf:type owl:ObjectProperty ;
+       owl:inverseOf :isFoundUsing ;
+       rdfs:comment "A procedure can find a trace" ;
+       rdfs:label "finds" .
+
+
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/hasA
 :hasA rdf:type owl:ObjectProperty ;
+      owl:inverseOf :isFoundIn ;
       rdfs:domain :Context ;
       rdfs:range :Trace ;
       rdfs:comment "A context may have 0 to multiple traces of depression" ;
-      rdfs:label "hasA" .
+      rdfs:label "containsTrace" .
+
+
+###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/hasOriginIn
+:hasOriginIn rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf owl:topObjectProperty ;
+             owl:inverseOf :isPreservedAs ;
+             rdfs:comment "An artifact is generated based on a social media publication" ;
+             rdfs:label "hasOriginIn" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/isAbout
@@ -26,6 +49,27 @@
          rdfs:range :Person ;
          rdfs:comment "A context is about a specific person" ;
          rdfs:label "isAbout" .
+
+
+###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/isFoundIn
+:isFoundIn rdf:type owl:ObjectProperty ;
+           rdfs:comment "A trace is found in a specific publication" ;
+           rdfs:label "isFoundIn" .
+
+
+###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/isFoundUsing
+:isFoundUsing rdf:type owl:ObjectProperty ;
+              rdfs:domain :Trace ;
+              rdfs:range :Procedure ;
+              rdfs:comment "A trace is found using a specific procedure" ;
+              rdfs:label "isFoundUsing" .
+
+
+###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/isOwned
+:isOwned rdf:type owl:ObjectProperty ;
+         owl:inverseOf :owns ;
+         rdfs:comment "A social media account has a person as an owner" ;
+         rdfs:label "isOwnedBy" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/isPreservedAs
@@ -39,8 +83,7 @@
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/isResultOf
 :isResultOf rdf:type owl:ObjectProperty ;
-            rdfs:domain :Artifact ,
-                        :Trace ;
+            rdfs:domain :Artifact ;
             rdfs:range :Procedure ;
             rdfs:comment "An artifact is the result of a procedure" ;
             rdfs:label "isResultOf" .
@@ -58,11 +101,22 @@
 #    Data properties
 #################################################################
 
-###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/comesFromSocialPlataform
-:comesFromSocialPlataform rdf:type owl:DatatypeProperty ;
-                          rdfs:domain :Account ,
-                                      :Publication ;
-                          rdfs:range xsd:string .
+###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH#hasAccountUrl
+:hasAccountUrl rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf owl:topDataProperty ;
+               rdfs:domain :Account ;
+               rdfs:range xsd:string ;
+               rdfs:comment "The url of an account" ;
+               rdfs:label "hasAccountUrl" .
+
+
+###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/comesFromSocialPlatform
+:comesFromSocialPlatform rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf owl:topDataProperty ;
+                         rdfs:domain :Account ;
+                         rdfs:range xsd:string ;
+                         rdfs:comment "The social media platform where the publication was published" ;
+                         rdfs:label "comesFromSocialPlatform" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/hasAge
@@ -70,20 +124,35 @@
         rdfs:subPropertyOf owl:topDataProperty ;
         rdfs:domain :Person ;
         rdfs:range xsd:positiveInteger ;
-        rdfs:comment "A person's age" .
+        rdfs:comment "A person's age" ;
+        rdfs:label "hasAge" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/hasCapturedMoment
 :hasCapturedMoment rdf:type owl:DatatypeProperty ;
                    rdfs:subPropertyOf owl:topDataProperty ;
+                   rdfs:domain :Publication ;
                    rdfs:range xsd:dateTimeStamp ;
-                   rdfs:comment "The moment when an evidence is captured" .
+                   rdfs:comment "The moment when an evidence is captured" ;
+                   rdfs:label "hasCapturedMoment" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/hasContent
 :hasContent rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf owl:topDataProperty ;
             rdfs:domain :Context ;
-            rdfs:range xsd:string .
+            rdfs:range xsd:string ;
+            rdfs:comment "The content of a social media publication in general" ;
+            rdfs:label "hasContent" .
+
+
+###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/hasCreationMoment
+:hasCreationMoment rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf owl:topDataProperty ;
+                   rdfs:domain :Artifact ;
+                   rdfs:range xsd:dateTimeStamp ;
+                   rdfs:comment "The moment when an artifact is created" ;
+                   rdfs:label "hasCreationMoment" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/hasEducation
@@ -91,17 +160,17 @@
               rdfs:subPropertyOf owl:topDataProperty ;
               rdfs:domain :Person ;
               rdfs:range xsd:string ;
-              rdfs:comment "A person's level of education" .
+              rdfs:comment "A person's level of education" ;
+              rdfs:label "hasEducation" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/hasEpisode
 :hasEpisode rdf:type owl:DatatypeProperty ;
             rdfs:subPropertyOf owl:topDataProperty ;
-            rdfs:domain :Bipolar ,
-                        :Depression ,
-                        :Psychotic ;
+            rdfs:domain :Condition ;
             rdfs:range xsd:boolean ;
-            rdfs:comment "A flag for mental health conditions with the possibility of having episodes" .
+            rdfs:comment "A flag for mental health conditions with the possibility of having episodes" ;
+            rdfs:label "hasEpisode" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/hasEthnicity
@@ -109,19 +178,17 @@
               rdfs:subPropertyOf owl:topDataProperty ;
               rdfs:domain :Person ;
               rdfs:range xsd:string ;
-              rdfs:comment "A person's ethnicity" .
+              rdfs:comment "A person's ethnicity" ;
+              rdfs:label "hasEthnicity" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/hasExplanation
 :hasExplanation rdf:type owl:DatatypeProperty ;
                 rdfs:subPropertyOf owl:topDataProperty ;
-                rdfs:domain :Behaviour ,
-                            :Cognition ,
-                            :Feeling ,
-                            :Impairment ,
-                            :Trace ;
+                rdfs:domain :Trace ;
                 rdfs:range xsd:string ;
-                rdfs:comment "The documentation of why a text was considered relevant" .
+                rdfs:comment "The documentation of why a text was considered relevant" ;
+                rdfs:label "hasExplanation" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/hasFamily
@@ -129,7 +196,8 @@
            rdfs:subPropertyOf owl:topDataProperty ;
            rdfs:domain :Person ;
            rdfs:range xsd:string ;
-           rdfs:comment "A person's family member or group" .
+           rdfs:comment "A person's family member or group" ;
+           rdfs:label "hasFamily" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/hasGender
@@ -137,7 +205,8 @@
            rdfs:subPropertyOf owl:topDataProperty ;
            rdfs:domain :Person ;
            rdfs:range xsd:string ;
-           rdfs:comment "A person's gender" .
+           rdfs:comment "A person's gender" ;
+           rdfs:label "hasGender" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/hasHashcode
@@ -145,12 +214,17 @@
              rdfs:subPropertyOf owl:topDataProperty ;
              rdfs:domain :Artifact ;
              rdfs:range xsd:string ;
-             rdfs:comment "A hashcode for data integrity assurance" .
+             rdfs:comment "A hashcode for data integrity assurance" ;
+             rdfs:label "hasHashcode" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/hasImageContent
 :hasImageContent rdf:type owl:DatatypeProperty ;
-                 rdfs:subPropertyOf :hasContent .
+                 rdfs:subPropertyOf :hasContent ;
+                 rdfs:domain :Publication ;
+                 rdfs:range xsd:base64Binary ;
+                 rdfs:comment "The content of a social media publication, specifically image data." ;
+                 rdfs:label "hasImageContent" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/hasIncome
@@ -158,17 +232,17 @@
            rdfs:subPropertyOf owl:topDataProperty ;
            rdfs:domain :Person ;
            rdfs:range xsd:string ;
-           rdfs:comment "A person's level of income" .
+           rdfs:comment "A person's level of income" ;
+           rdfs:label "hasIncome" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/hasMoment
 :hasMoment rdf:type owl:DatatypeProperty ;
            rdfs:subPropertyOf owl:topDataProperty ;
-           rdfs:domain :Artifact ,
-                       :MedicalRecord ,
-                       :Post ;
+           rdfs:domain :Context ;
            rdfs:range xsd:dateTimeStamp ;
-           rdfs:comment "The moment when a publication is created" .
+           rdfs:comment "The moment when a context (publication or mental record) is created" ;
+           rdfs:label "hasMoment" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/hasName
@@ -176,7 +250,8 @@
          rdfs:subPropertyOf owl:topDataProperty ;
          rdfs:domain :Person ;
          rdfs:range xsd:string ;
-         rdfs:comment "A person's name" .
+         rdfs:comment "A person's name" ;
+         rdfs:label "hasName" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/hasRelationship
@@ -184,7 +259,8 @@
                  rdfs:subPropertyOf owl:topDataProperty ;
                  rdfs:domain :Person ;
                  rdfs:range xsd:string ;
-                 rdfs:comment "A person's relationship" .
+                 rdfs:comment "A person's relationship" ;
+                 rdfs:label "hasRelationship" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/hasSentimentScore
@@ -192,26 +268,35 @@
                    rdfs:subPropertyOf owl:topDataProperty ;
                    rdfs:domain :Publication ;
                    rdfs:range xsd:decimal ;
-                   rdfs:comment "A sentiment socre calculated by sentiment analysis techniques" .
+                   rdfs:comment "A sentiment socre calculated by sentiment analysis techniques" ;
+                   rdfs:label "hasSentimentScore" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/hasTextContent
 :hasTextContent rdf:type owl:DatatypeProperty ;
-                rdfs:subPropertyOf :hasContent .
+                rdfs:subPropertyOf :hasContent ;
+                rdfs:domain :Context ;
+                rdfs:range xsd:string ;
+                rdfs:comment "The content of a social media publication, specifically text data." ;
+                rdfs:label "hasTextContent" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/hasUrl
 :hasUrl rdf:type owl:DatatypeProperty ;
         rdfs:subPropertyOf owl:topDataProperty ;
-        rdfs:domain :Account ,
-                    :Artifact ;
+        rdfs:domain :Publication ;
         rdfs:range xsd:string ;
-        rdfs:comment "The url of an account or artifact" .
+        rdfs:comment "The url from where the data from a publication was captured" ;
+        rdfs:label "hasUrl" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/hasVideoContent
 :hasVideoContent rdf:type owl:DatatypeProperty ;
-                 rdfs:subPropertyOf :hasContent .
+                 rdfs:subPropertyOf :hasContent ;
+                 rdfs:domain :Publication ;
+                 rdfs:range xsd:anyURI ;
+                 rdfs:comment "The content of a social media publication, specifically video data." ;
+                 rdfs:label "hasVideoContent" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/isRelevant
@@ -219,7 +304,21 @@
             rdfs:subPropertyOf owl:topDataProperty ;
             rdfs:domain :Publication ;
             rdfs:range xsd:boolean ;
-            rdfs:comment "A flag indicating if an artifact is relevant for a depression diagnosis" .
+            rdfs:comment "A flag indicating if an artifact is relevant for a depression diagnosis" ;
+            rdfs:label "isRelevant" .
+
+
+###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/publishedInSocialPlatform
+:publishedInSocialPlatform rdf:type owl:DatatypeProperty ;
+                           rdfs:subPropertyOf owl:topDataProperty ;
+                           rdfs:domain :Publication ;
+                           rdfs:range xsd:string ;
+                           rdfs:comment "The social media platform where the account was created" ;
+                           rdfs:label "publishedInSocialPlatform" .
+
+
+###  http://www.w3.org/2002/07/owl#topDataProperty
+owl:topDataProperty rdfs:subPropertyOf owl:topDataProperty .
 
 
 #################################################################
@@ -518,8 +617,8 @@
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Profile
 :Profile rdf:type owl:Class ;
          rdfs:subClassOf :Publication ;
-         rdfs:label "A publication on a social media platform, presented as a profile, represents an update of the users profile, usually whitout timestamp that overwrite the previous content." ,
-                    "Profile" .
+         rdfs:comment "A publication on a social media platform, presented as a profile, represents an update of the users profile, usually whitout timestamp that overwrite the previous content." ;
+         rdfs:label "Profile" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/PsychomotorActivity
@@ -668,7 +767,7 @@
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/AccountID1
 :AccountID1 rdf:type owl:NamedIndividual ,
                      :Account ;
-            :comesFromSocialPlataform "Instagram" ;
+            :comesFromSocialPlatform "Instagram" ;
             :hasUrl "https://www.instagram.com/fakeuser123/" .
 
 
@@ -680,8 +779,8 @@
                         :SQLliteLocalDatabase ,
                         :UserSharing ,
                         :VADERSentimentScoring ;
-            :hasHashcode "c73ac0375935c5ffaf6b1dfec1ed9e949f9ea2cb618ca5e7ce7435d6ecfebeeb" ;
-            :hasMoment "2024-09-05T15:52:44Z"^^xsd:dateTimeStamp .
+            :hasCreationMoment "2024-09-05T15:52:44Z"^^xsd:dateTimeStamp ;
+            :hasHashcode "c73ac0375935c5ffaf6b1dfec1ed9e949f9ea2cb618ca5e7ce7435d6ecfebeeb" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Artifact02
@@ -692,8 +791,8 @@
                         :SQLliteLocalDatabase ,
                         :UserSharing ,
                         :VADERSentimentScoring ;
-            :hasHashcode "e64af9c05ea30fb763ebae3a0509257e762db83ad8532c8fcdaac02826d6a5be" ;
-            :hasMoment "2024-09-05T15:52:44Z"^^xsd:dateTimeStamp .
+            :hasCreationMoment "2024-09-05T15:52:44Z"^^xsd:dateTimeStamp ;
+            :hasHashcode "e64af9c05ea30fb763ebae3a0509257e762db83ad8532c8fcdaac02826d6a5be" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Artifact03
@@ -704,8 +803,8 @@
                         :SQLliteLocalDatabase ,
                         :UserSharing ,
                         :VADERSentimentScoring ;
-            :hasHashcode "5459fabf4692cee8c490292c166a0b626a2bc58ae2d8c400cddd9642c0a98ee1" ;
-            :hasMoment "2024-09-05T15:52:44Z"^^xsd:dateTimeStamp .
+            :hasCreationMoment "2024-09-05T15:52:44Z"^^xsd:dateTimeStamp ;
+            :hasHashcode "5459fabf4692cee8c490292c166a0b626a2bc58ae2d8c400cddd9642c0a98ee1" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Artifact04
@@ -716,8 +815,8 @@
                         :SQLliteLocalDatabase ,
                         :UserSharing ,
                         :VADERSentimentScoring ;
-            :hasHashcode "943a7a3e891937212b76dfc4db0eed8f405c7acd98866880a91a40d1f58b5065" ;
-            :hasMoment "2024-09-05T15:52:44Z"^^xsd:dateTimeStamp .
+            :hasCreationMoment "2024-09-05T15:52:44Z"^^xsd:dateTimeStamp ;
+            :hasHashcode "943a7a3e891937212b76dfc4db0eed8f405c7acd98866880a91a40d1f58b5065" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Artifact05
@@ -728,8 +827,8 @@
                         :SQLliteLocalDatabase ,
                         :UserSharing ,
                         :VADERSentimentScoring ;
-            :hasHashcode "e0947431a6f6e4e7df69bfc6e7cc1559f5716d3880815e6e3f115687fd175ff7" ;
-            :hasMoment "2024-09-05T15:52:44Z"^^xsd:dateTimeStamp .
+            :hasCreationMoment "2024-09-05T15:52:44Z"^^xsd:dateTimeStamp ;
+            :hasHashcode "e0947431a6f6e4e7df69bfc6e7cc1559f5716d3880815e6e3f115687fd175ff7" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Artifact06
@@ -740,8 +839,8 @@
                         :SQLliteLocalDatabase ,
                         :UserSharing ,
                         :VADERSentimentScoring ;
-            :hasHashcode "406929903c329f3087ca9e4c5c7d10c208ef357fed8a9cb5eb48e04099d9016d" ;
-            :hasMoment "2024-09-05T15:52:44Z"^^xsd:dateTimeStamp .
+            :hasCreationMoment "2024-09-05T15:52:44Z"^^xsd:dateTimeStamp ;
+            :hasHashcode "406929903c329f3087ca9e4c5c7d10c208ef357fed8a9cb5eb48e04099d9016d" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Artifact07
@@ -752,8 +851,8 @@
                         :SQLliteLocalDatabase ,
                         :UserSharing ,
                         :VADERSentimentScoring ;
-            :hasHashcode "de54672e3f452459ac79689f601c8889b5a1e0a629a75bb01ab9650134f08449" ;
-            :hasMoment "2024-09-05T15:52:44Z"^^xsd:dateTimeStamp .
+            :hasCreationMoment "2024-09-05T15:52:44Z"^^xsd:dateTimeStamp ;
+            :hasHashcode "de54672e3f452459ac79689f601c8889b5a1e0a629a75bb01ab9650134f08449" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Artifact08
@@ -764,8 +863,8 @@
                         :SQLliteLocalDatabase ,
                         :UserSharing ,
                         :VADERSentimentScoring ;
-            :hasHashcode "b002d6ec642f346d0d65ba10f35655eee290cca3dd2c8bc95027a923748991a0" ;
-            :hasMoment "2024-09-05T15:52:44Z"^^xsd:dateTimeStamp .
+            :hasCreationMoment "2024-09-05T15:52:44Z"^^xsd:dateTimeStamp ;
+            :hasHashcode "b002d6ec642f346d0d65ba10f35655eee290cca3dd2c8bc95027a923748991a0" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Artifact09
@@ -776,8 +875,8 @@
                         :SQLliteLocalDatabase ,
                         :UserSharing ,
                         :VADERSentimentScoring ;
-            :hasHashcode "e9c76d6b1ec4c7c3aa5e38ec318ff78c7bc03174de21b6b5a2b33166e8ae0905" ;
-            :hasMoment "2024-09-05T15:52:44Z"^^xsd:dateTimeStamp .
+            :hasCreationMoment "2024-09-05T15:52:44Z"^^xsd:dateTimeStamp ;
+            :hasHashcode "e9c76d6b1ec4c7c3aa5e38ec318ff78c7bc03174de21b6b5a2b33166e8ae0905" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Artifact10
@@ -788,8 +887,8 @@
                         :SQLliteLocalDatabase ,
                         :UserSharing ,
                         :VADERSentimentScoring ;
-            :hasHashcode "6056ae2fa6b104a2b76902c9664ffc89e272b65baed683d53eada9d9f6993f9b" ;
-            :hasMoment "2024-09-05T15:52:44Z"^^xsd:dateTimeStamp .
+            :hasCreationMoment "2024-09-05T15:52:44Z"^^xsd:dateTimeStamp ;
+            :hasHashcode "6056ae2fa6b104a2b76902c9664ffc89e272b65baed683d53eada9d9f6993f9b" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Artifact11
@@ -800,8 +899,8 @@
                         :SQLliteLocalDatabase ,
                         :UserSharing ,
                         :VADERSentimentScoring ;
-            :hasHashcode "819eba076a38e6aa3114b05be2182733aa0c3c4306310017c28cc543bb115e35" ;
-            :hasMoment "2024-09-05T15:52:44Z"^^xsd:dateTimeStamp .
+            :hasCreationMoment "2024-09-05T15:52:44Z"^^xsd:dateTimeStamp ;
+            :hasHashcode "819eba076a38e6aa3114b05be2182733aa0c3c4306310017c28cc543bb115e35" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Artifact12
@@ -812,8 +911,8 @@
                         :SQLliteLocalDatabase ,
                         :UserSharing ,
                         :VADERSentimentScoring ;
-            :hasHashcode "cced3e94c2f464d968fdab4728f37ec894a2234b1651959a20d02d172dbcf640" ;
-            :hasMoment "2024-09-05T15:52:44Z"^^xsd:dateTimeStamp .
+            :hasCreationMoment "2024-09-05T15:52:44Z"^^xsd:dateTimeStamp ;
+            :hasHashcode "cced3e94c2f464d968fdab4728f37ec894a2234b1651959a20d02d172dbcf640" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Artifact13
@@ -824,8 +923,8 @@
                         :SQLliteLocalDatabase ,
                         :UserSharing ,
                         :VADERSentimentScoring ;
-            :hasHashcode "a113e5dd1b7aedfb67f97266c090d12f9a0441c917060a4378a7ab340eebc753" ;
-            :hasMoment "2024-09-05T15:52:44Z"^^xsd:dateTimeStamp .
+            :hasCreationMoment "2024-09-05T15:52:44Z"^^xsd:dateTimeStamp ;
+            :hasHashcode "a113e5dd1b7aedfb67f97266c090d12f9a0441c917060a4378a7ab340eebc753" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Artifact14
@@ -836,8 +935,8 @@
                         :SQLliteLocalDatabase ,
                         :UserSharing ,
                         :VADERSentimentScoring ;
-            :hasHashcode "22405e91888ce3483c6d7f12361e1b83e831984f66bb96acfa7d221b99029e6a" ;
-            :hasMoment "2024-09-05T15:52:44Z"^^xsd:dateTimeStamp .
+            :hasCreationMoment "2024-09-05T15:52:44Z"^^xsd:dateTimeStamp ;
+            :hasHashcode "22405e91888ce3483c6d7f12361e1b83e831984f66bb96acfa7d221b99029e6a" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Artifact15
@@ -848,15 +947,13 @@
                         :SQLliteLocalDatabase ,
                         :UserSharing ,
                         :VADERSentimentScoring ;
-            :hasHashcode "58f96f5efde1ccb26bea2231f29d3c321805a5f39baf190033372c84c107a608" ;
-            :hasMoment "2024-09-05T15:52:44Z"^^xsd:dateTimeStamp .
+            :hasCreationMoment "2024-09-05T15:52:44Z"^^xsd:dateTimeStamp ;
+            :hasHashcode "58f96f5efde1ccb26bea2231f29d3c321805a5f39baf190033372c84c107a608" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/LLMTraceDetection
 :LLMTraceDetection rdf:type owl:NamedIndividual ,
-                            :Analisys ;
-                   :isResultOf :LLMTraceDetection ;
-                   :hasExplanation "the mention of no longer using a sling and experiencing pain indicates a physical condition, potentially an injury or chronic pain, that has been managed over time." .
+                            :Analisys .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/LLMTranslation
@@ -893,7 +990,7 @@
           :hasA :Trace17 ;
           :isAbout :AccountID1 ;
           :isPreservedAs :Artifact01 ;
-          :comesFromSocialPlataform "Instagram" ;
+          :publishedInSocialPlatform "Instagram" ;
           :hasCapturedMoment "2024-08-05T19:05:54Z"^^xsd:dateTimeStamp ;
           :hasMoment "2024-02-26T01:07:57Z"^^xsd:dateTimeStamp ;
           :hasSentimentScore -0.5423 ;
@@ -908,7 +1005,7 @@
           :hasA :Trace16 ;
           :isAbout :AccountID1 ;
           :isPreservedAs :Artifact02 ;
-          :comesFromSocialPlataform "Instagram" ;
+          :publishedInSocialPlatform "Instagram" ;
           :hasCapturedMoment "2024-08-05T19:05:54Z"^^xsd:dateTimeStamp ;
           :hasMoment "2023-12-21T20:14:08Z"^^xsd:dateTimeStamp ;
           :hasSentimentScore 0.2263 ;
@@ -926,7 +1023,7 @@
                 :Trace15 ;
           :isAbout :AccountID1 ;
           :isPreservedAs :Artifact03 ;
-          :comesFromSocialPlataform "Instagram" ;
+          :publishedInSocialPlatform "Instagram" ;
           :hasCapturedMoment "2024-08-05T19:05:54Z"^^xsd:dateTimeStamp ;
           :hasMoment "2022-05-14T01:39:45Z"^^xsd:dateTimeStamp ;
           :hasSentimentScore 0.0516 ;
@@ -941,7 +1038,7 @@
           :hasA :Trace11 ;
           :isAbout :AccountID1 ;
           :isPreservedAs :Artifact04 ;
-          :comesFromSocialPlataform "Instagram" ;
+          :publishedInSocialPlatform "Instagram" ;
           :hasCapturedMoment "2024-08-05T19:05:54Z"^^xsd:dateTimeStamp ;
           :hasMoment "2021-12-22T00:51:17Z"^^xsd:dateTimeStamp ;
           :hasSentimentScore 0.2263 ;
@@ -957,7 +1054,7 @@
                 :Trace10 ;
           :isAbout :AccountID1 ;
           :isPreservedAs :Artifact05 ;
-          :comesFromSocialPlataform "Instagram" ;
+          :publishedInSocialPlatform "Instagram" ;
           :hasCapturedMoment "2024-08-05T19:05:54Z"^^xsd:dateTimeStamp ;
           :hasMoment "2021-06-21T02:58:09Z"^^xsd:dateTimeStamp ;
           :hasSentimentScore 0.2263 ;
@@ -972,7 +1069,7 @@
           :hasA :Trace08 ;
           :isAbout :AccountID1 ;
           :isPreservedAs :Artifact06 ;
-          :comesFromSocialPlataform "Instagram" ;
+          :publishedInSocialPlatform "Instagram" ;
           :hasCapturedMoment "2024-08-05T19:05:54Z"^^xsd:dateTimeStamp ;
           :hasMoment "2021-05-14T15:28:46Z"^^xsd:dateTimeStamp ;
           :hasSentimentScore 0.2263 ;
@@ -988,7 +1085,7 @@
                 :Trace07 ;
           :isAbout :AccountID1 ;
           :isPreservedAs :Artifact07 ;
-          :comesFromSocialPlataform "Instagram" ;
+          :publishedInSocialPlatform "Instagram" ;
           :hasCapturedMoment "2024-08-05T19:05:54Z"^^xsd:dateTimeStamp ;
           :hasMoment "2021-04-29T22:05:03Z"^^xsd:dateTimeStamp ;
           :hasSentimentScore 0.4588 ;
@@ -1003,7 +1100,7 @@
           :hasA :Trace05 ;
           :isAbout :AccountID1 ;
           :isPreservedAs :Artifact08 ;
-          :comesFromSocialPlataform "Instagram" ;
+          :publishedInSocialPlatform "Instagram" ;
           :hasCapturedMoment "2024-08-05T19:05:54Z"^^xsd:dateTimeStamp ;
           :hasMoment "2021-03-12T21:26:43Z"^^xsd:dateTimeStamp ;
           :hasSentimentScore 0.2263 ;
@@ -1018,7 +1115,7 @@
           :hasA :Trace04 ;
           :isAbout :AccountID1 ;
           :isPreservedAs :Artifact09 ;
-          :comesFromSocialPlataform "Instagram" ;
+          :publishedInSocialPlatform "Instagram" ;
           :hasCapturedMoment "2024-08-05T19:05:54Z"^^xsd:dateTimeStamp ;
           :hasMoment "2020-12-24T23:47:39Z"^^xsd:dateTimeStamp ;
           :hasSentimentScore 0.2263 ;
@@ -1034,7 +1131,7 @@
                 :Trace03 ;
           :isAbout :AccountID1 ;
           :isPreservedAs :Artifact10 ;
-          :comesFromSocialPlataform "Instagram" ;
+          :publishedInSocialPlatform "Instagram" ;
           :hasCapturedMoment "2024-08-05T19:05:54Z"^^xsd:dateTimeStamp ;
           :hasMoment "2020-09-22T22:04:20Z"^^xsd:dateTimeStamp ;
           :hasSentimentScore 0.4574 ;
@@ -1048,7 +1145,7 @@
                    :Post ;
           :isAbout :AccountID1 ;
           :isPreservedAs :Artifact11 ;
-          :comesFromSocialPlataform "Instagram" ;
+          :publishedInSocialPlatform "Instagram" ;
           :hasCapturedMoment "2024-08-05T19:05:54Z"^^xsd:dateTimeStamp ;
           :hasMoment "2020-05-09T03:09:26Z"^^xsd:dateTimeStamp ;
           :hasSentimentScore 0.2263 ;
@@ -1062,7 +1159,7 @@
                    :Post ;
           :isAbout :AccountID1 ;
           :isPreservedAs :Artifact12 ;
-          :comesFromSocialPlataform "Instagram" ;
+          :publishedInSocialPlatform "Instagram" ;
           :hasCapturedMoment "2024-08-05T19:05:54Z"^^xsd:dateTimeStamp ;
           :hasMoment "2020-04-23T21:31:08Z"^^xsd:dateTimeStamp ;
           :hasSentimentScore -0.2263 ;
@@ -1077,7 +1174,7 @@
           :hasA :Trace01 ;
           :isAbout :AccountID1 ;
           :isPreservedAs :Artifact13 ;
-          :comesFromSocialPlataform "Instagram" ;
+          :publishedInSocialPlatform "Instagram" ;
           :hasCapturedMoment "2024-08-05T19:05:54Z"^^xsd:dateTimeStamp ;
           :hasMoment "2020-04-01T00:04:48Z"^^xsd:dateTimeStamp ;
           :hasSentimentScore 0.2263 ;
@@ -1091,7 +1188,7 @@
                    :Post ;
           :isAbout :AccountID1 ;
           :isPreservedAs :Artifact14 ;
-          :comesFromSocialPlataform "Instagram" ;
+          :publishedInSocialPlatform "Instagram" ;
           :hasCapturedMoment "2024-08-05T19:05:54Z"^^xsd:dateTimeStamp ;
           :hasMoment "2018-07-06T21:31:50Z"^^xsd:dateTimeStamp ;
           :hasSentimentScore 0.2263 ;
@@ -1105,7 +1202,7 @@
                      :Profile ;
             :isAbout :AccountID1 ;
             :isPreservedAs :Artifact15 ;
-            :comesFromSocialPlataform "Instagram" ;
+            :publishedInSocialPlatform "Instagram" ;
             :hasCapturedMoment "2024-08-05T19:05:54Z"^^xsd:dateTimeStamp ;
             :hasSentimentScore 0.4588 ;
             :hasTextContent """Technologist with a focus on health
@@ -1128,117 +1225,117 @@ Designer and RPG enthusiast as a hobby""" ;
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Trace01
 :Trace01 rdf:type owl:NamedIndividual ,
                   :Relation ;
-         :isResultOf :LLMTraceDetection ;
+         :isFoundUsing :LLMTraceDetection ;
          :hasExplanation "the text includes a name, \"Anita,\" which is the name of the cat" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Trace02
 :Trace02 rdf:type owl:NamedIndividual ,
                   :Feeling ;
-         :isResultOf :LLMTraceDetection ;
+         :isFoundUsing :LLMTraceDetection ;
          :hasExplanation "The text expresses gratitude and surprise, and it implicitly conveys feelings of regret for the delayed acknowledgment. These sentiments relate to gratitude and regret." .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Trace03
 :Trace03 rdf:type owl:NamedIndividual ,
                   :Condition ;
-         :isResultOf :LLMTraceDetection ;
+         :isFoundUsing :LLMTraceDetection ;
          :hasExplanation "The text mentions an impact on the physical condition due to the pandemic, which affected the ability to attend a graduation ceremony." .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Trace04
 :Trace04 rdf:type owl:NamedIndividual ,
                   :Feeling ;
-         :isResultOf :LLMTraceDetection ;
+         :isFoundUsing :LLMTraceDetection ;
          :hasExplanation "the text conveys a sense of hope and positivity by offering the companionship of kittens, which can relate to feelings of pleasure and joy." .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Trace05
 :Trace05 rdf:type owl:NamedIndividual ;
-         :isResultOf :LLMTraceDetection ;
+         :isFoundUsing :LLMTraceDetection ;
          :hasExplanation "Potentially, the inability to continue drawing could be linked to feelings like frustration or sadness, but these are not explicitly stated in the text." .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Trace06
 :Trace06 rdf:type owl:NamedIndividual ,
                   :Relation ;
-         :isResultOf :LLMTraceDetection ;
+         :isFoundUsing :LLMTraceDetection ;
          :hasExplanation "includes a relationship context (interaction with a coworker)" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Trace07
 :Trace07 rdf:type owl:NamedIndividual ,
                   :Feeling ;
-         :isResultOf :LLMTraceDetection ;
+         :isFoundUsing :LLMTraceDetection ;
          :hasExplanation "the text conveys humor and perhaps curiosity about self-appearance which could relate to the feelings of amusement or curiosity." .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Trace08
 :Trace08 rdf:type owl:NamedIndividual ,
                   :Irritability ;
-         :isResultOf :LLMTraceDetection ;
+         :isFoundUsing :LLMTraceDetection ;
          :hasExplanation "the text might convey a sense of urgency or mild distress about needing a plate for lunch, which can relate to feelings of annoyance or frustration. The message humorously expresses a minor inconvenience (a missing plate) and uses personification (\"Human, my plate was missing\") to add character to the statement, likely meant to amuse or engage social media followers." .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Trace09
 :Trace09 rdf:type owl:NamedIndividual ,
                   :Relation ;
-         :isResultOf :LLMTraceDetection ;
+         :isFoundUsing :LLMTraceDetection ;
          :hasExplanation "The text indicates a relationship of affection and loss (the speaker and the deceased referred to as \"dear big ears\")" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Trace10
 :Trace10 rdf:type owl:NamedIndividual ;
-         :isResultOf :LLMTraceDetection ;
+         :isFoundUsing :LLMTraceDetection ;
          :hasExplanation "Yes, the text conveys sentiments of sadness and loss due to the death of \"dear big ears,\" which might be a nickname for a beloved pet or individual. It also expresses a hopeful sentiment that \"Heaven became a happier place.\"" .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Trace11
 :Trace11 rdf:type owl:NamedIndividual ,
                   :Feeling ;
-         :isResultOf :LLMTraceDetection ;
+         :isFoundUsing :LLMTraceDetection ;
          :hasExplanation "Potentially, it could suggest a sense of renewal or change, given the update of a profile picture after a significant period. However, these feelings are not explicitly mentioned." .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Trace12
 :Trace12 rdf:type owl:NamedIndividual ,
                   :AlcoholUse ;
-         :isResultOf :LLMTraceDetection ;
+         :isFoundUsing :LLMTraceDetection ;
          :hasExplanation "The text mentions having a beer, which indicates alcohol use." .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Trace13
 :Trace13 rdf:type owl:NamedIndividual ,
                   :Feeling ;
-         :isResultOf :LLMTraceDetection ;
+         :isFoundUsing :LLMTraceDetection ;
          :hasExplanation "The text conveys a range of sentiments including overcoming pain, personal growth, and a sense of victory. These can relate to sentiments of hope, perseverance, and happiness." .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Trace14
 :Trace14 rdf:type owl:NamedIndividual ,
                   :Condition ;
-         :isResultOf :LLMTraceDetection ;
+         :isFoundUsing :LLMTraceDetection ;
          :hasExplanation "The mention of no longer using a sling and experiencing pain indicates a physical condition, potentially an injury or chronic pain, that has been managed over time." .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Trace15
 :Trace15 rdf:type owl:NamedIndividual ,
                   :Event ;
-         :isResultOf :LLMTraceDetection ;
+         :isFoundUsing :LLMTraceDetection ;
          :hasExplanation "mentions a significant life event (returning to college), a physical condition (injury or pain management), and personal lifestyle changes." .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Trace16
 :Trace16 rdf:type owl:NamedIndividual ,
                   :Feeling ;
-         :isResultOf :LLMTraceDetection ;
+         :isFoundUsing :LLMTraceDetection ;
          :hasExplanation "Potentially, the text might convey a sense of relaxation or enjoyment from engaging in a leisure activity (drawing) during the holidays, but these sentiments are not explicitly mentioned." .
 
 
 ###  http://www.semanticweb.org/alfoppa/ontologies/2024/3/SPMH/Trace17
 :Trace17 rdf:type owl:NamedIndividual ,
                   :Feeling ;
-         :isResultOf :LLMTraceDetection ;
+         :isFoundUsing :LLMTraceDetection ;
          :hasExplanation "the text might convey sentiments of disappointment or dissatisfaction regarding the artistic outcome, reflecting feelings such as frustration." .
 
 
